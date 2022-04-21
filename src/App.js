@@ -3,6 +3,8 @@ import CartContext from "./context/cartContext";
 import Login from "./context/Login";
 import MoviePage from "./context/MoviePage";
 import UserContext from "./context/userContext";
+import Counter from "./hooks/Counter";
+import Users from "./hooks/Users";
 class App extends Component {
   state = { currentUser: { name: "Doraemon" } };
 
@@ -16,19 +18,8 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <CartContext.Provider value={{ cart: [] }}>
-          <UserContext.Provider
-            value={{
-              currentUser: this.state.currentUser,
-              onLoggedIn: this.handleLoggedIn,
-            }}
-          >
-            <div>
-              <MoviePage />
-              <Login />
-            </div>
-          </UserContext.Provider>
-        </CartContext.Provider>
+        <Counter />
+        <Users />
       </React.Fragment>
     );
   }
