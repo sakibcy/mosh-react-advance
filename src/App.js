@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import CartContext from "./context/cartContext";
+import Login from "./context/Login";
+import MoviePage from "./context/MoviePage";
+import UserContext from "./context/userContext";
+class App extends Component {
+  state = { currentUser: { name: "Doraemon" } };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  handleLoggedIn = (username) => {
+    console.log("Logging the user: " + username);
+    const user = { name: "Nobita" };
+
+    this.setState({ currentUser: user });
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <CartContext.Provider value={{ cart: [] }}>
+          <UserContext.Provider
+            value={{
+              currentUser: this.state.currentUser,
+              onLoggedIn: this.handleLoggedIn,
+            }}
+          >
+            <div>
+              <MoviePage />
+              <Login />
+            </div>
+          </UserContext.Provider>
+        </CartContext.Provider>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
